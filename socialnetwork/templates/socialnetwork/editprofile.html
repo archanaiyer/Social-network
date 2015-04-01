@@ -1,0 +1,50 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block title %}
+Edit profile
+{% endblock %}
+    
+    {% block header1 %}
+     <div class="right">
+        <a href="{% url 'logout' %}" class="btn waves-effect waves-light red lighten-2">LOGOUT
+        </a>
+    </div> 
+    {% endblock %}
+
+    {% block header2 %}
+    <div class="left">Edit your profile, <span> {{user.username}}</span>!</div>
+    <div class="right">
+        <a href="{% url 'home' %}" class="btn waves-effect waves-light red lighten-2">GLOBAL STREAM
+        </a>
+    </div> 
+    {% endblock %}
+
+    {% block content %}
+      <form class="row" method="POST" action="{% url 'edit_profile' %} "  enctype="multipart/form-data">   
+        <div class="row">
+            <div class="container">      
+                <div class="row">
+                <br>
+                    <div class="card-panel col l12 offset-l9 m12 offset-m0 s8 z-depth z-depth-3" id="add-posts"> 
+                        <div class="container">
+                        <label for="first_name">First name: </label>
+                        {{registration_form.first_name}}
+                        <br> <label for="last_name">Last name: </label>
+                        {{registration_form.last_name}}
+                        <label for="age">Age: </label>
+                        {{profile_form.age}}<br>
+                        <label for="bio">Bio: </label>
+                        {{profile_form.bio}}
+                        <br>
+                        <br>
+                        <button class="btn waves-effect waves-light red lighten-2" type="submit" name="action">SAVE CHANGES
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </div>   
+            </div> 
+        </div>
+        {% csrf_token %}
+    </form>  
+    </div>
+    {% endblock %}

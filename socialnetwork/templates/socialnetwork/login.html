@@ -1,0 +1,56 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block title %}
+Login 
+{% endblock %}
+    
+    {% block header2 %}
+    <div class="left">Please login below to continue</div>
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    <div class="row">
+        <form method="post" action="{% url 'django.contrib.auth.views.login' %}" class="col s12">
+            <div class="container">      
+                <div class="row">
+                <br>
+                    <div class="card-panel col l12 offset-l9 m12 offset-m0 s8 z-depth z-depth-3" id="add-posts"> 
+                        <div class="row">
+                            {% if form.errors %}
+                            <div class ="error" style="color:red">
+                                Incorrect user name and password
+                            </div>
+                            {% endif %} 
+                        <br>
+                        <div class="col s6 offset-s3 grid-example"><span class="flow-text">{{ form.username.label_tag }}</span>
+                        </div>
+                        <div class="col s6 offset-s3 offset-l3 grid-example"><span class="flow-text">{{ form.username }}</span>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6 offset-s3 grid-example"><span class="flow-text">{{ form.password.label_tag }}</span>
+                        </div>
+                        <div class="col s6 offset-s3 grid-example"><span class="flow-text">{{ form.password }}</span>
+                        </div>
+                    </div>
+
+                    <button class="btn waves-effect waves-light red lighten-2" type="submit" name="action">LOGIN
+                        <i class="mdi-content-send right"></i>
+                    </button>
+                    
+                    <br> <a href="{% url 'register' %}">Register</a>
+                </div>
+            </div> 
+        </div> 
+        <br>
+        
+        <input type="hidden" name="next" value="{{ next }}" />
+        {% csrf_token %}
+        
+        <br><br>
+
+    </form>
+    </div> 
+    {% endblock %}
+

@@ -1,0 +1,26 @@
+{% for post in posts %}
+<form class="postsform" data-pid="{{post.id}}">
+    <div class="card-panel col l12 offset-l9 m12 offset-m0 s8 z-depth-1" id="global-stream">
+            {% for profile in profiles %}
+            {% if post.user.id == profile.user.id %}
+            {% if profile.picture_url %}
+            <div class="left">
+                <img src={{profile.picture_url}} alt="{{post.user.text}}" width="50px" height="auto">
+            </div>  
+            {% else %}
+            <div class="left">
+                {% load staticfiles %}
+                <img src={% static 'socialnetwork/default_avatar.jpg' %} width="50px" height="auto">
+                }
+            </div>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        <div> <a href="{% url 'profile' post.user.id %}" + id>{{post.user}}</a></div>
+        <div> {{post.date_time}} </div>
+        <div> {{post.post_content}} </div>
+        <div><input type="text" placeholder="Comment">
+        <input type="submit" value="submit"> </div>  <br>
+    </div> 
+</form>
+{% endfor %} 

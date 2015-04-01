@@ -1,0 +1,21 @@
+<div class="grey lighten-2">
+{% for comment in comments %}
+<div class="row">
+<div>
+{% if comment.comment_by.picture_url %}
+    <div class="left">
+        <img src={{comment.comment_by.picture_url}}  width="30px" height="auto">
+    </div>  
+{% else %}
+    <div class="left">
+    	{% load staticfiles %}
+        <img src={% static 'socialnetwork/default_avatar.jpg' %} width="30px" height="auto">
+    </div>
+{% endif %} 
+<div> {{comment.comment_by.user}}
+<div class="right">{{comment.comment_datetime}}</div>
+</div>
+{{comment.comment_text}} 
+</div>
+{% endfor %}
+</div>

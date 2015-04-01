@@ -1,0 +1,81 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block title %}
+{{user.username}}
+{% endblock %}
+    
+    {% block header1 %}
+    <div class="right">
+        <a href="{% url 'logout' %}" class="btn waves-effect waves-teal lighten-3">LOGOUT
+        </a>
+    </div> 
+    {% endblock %}
+
+    {% block header2 %}
+     <div class="right">
+        <a href="{% url 'home' %}" class="btn waves-effect waves-light red lighten-2">GLOBAL STREAM
+        </a>
+    </div> 
+    <div class="left">
+        <a href="{% url 'followerstream' %}" class="btn waves-effect waves-light red lighten-2">FOLLOWER STREAM
+        </a>
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    <form>
+    <br>
+    <br>
+    {% if messages1%}
+        <p class="center-align">You are following {{user.username}}</p>
+    {% endif %}
+    {% if messages2%}
+        <p class="center-align">You have now unfollowed {{user.username}}</p>
+    {% endif %}
+    <div class="row">
+        <div class="container">
+        <div class="col s5">
+            <div class="section" class="center-align">
+            <div class="text">USERNAME: </div> {{user.username}}
+            <div class="text">FIRST NAME: </div>{{user.first_name}}
+            <div class="text">LAST NAME: </div>{{user.last_name}}
+            <div class="text">AGE: </div>{{profile.age}}
+            <div class="text">BIO: </div>{{profile.bio}}
+        </div>
+        </div>
+        {% if current_user.id != user.id %}
+            <a href={% url 'follow' user.id %} class="btn waves-effect waves-teal lighten-3">FOLLOW</a>
+            <a href={% url 'unfollow' user.id %} class="btn waves-effect waves-lteal lighten-3">UNFOLLOW</a>
+        {% endif %}
+        {% if profile.picture_url %}
+        <div class="col s7">
+            <img src={{profile.picture_url}} width="200px" height="auto">
+            <!-- <img src="{% url 'photo' profile.id %}" alt="{{profile.text}}" width="200px" height="auto"> -->
+        </div>  
+        {% else %}
+        <div class="col s7">
+            {% load staticfiles %}
+            <img src={% static "socialnetwork/default_avatar.jpg" %} width="200px" height="auto">
+            }
+        </div>             
+        {% endif %}
+        <br>
+        <br>
+
+        <div class="container ">
+        <div class="row ">
+        {% for post in posts %}
+            <div class="card-panel col l12 offset-l9 m12 offset-m0 s8 z-depth-2" id="global-stream">
+                <div>{{post.date_time}}</div>
+                <div>{{post.post_content}}</div>
+            </div> 
+         {% endfor %}
+        </div>
+        </div>
+       
+         
+      </div>
+    </div>
+    </form>
+    {% endblock %}
+

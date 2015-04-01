@@ -1,0 +1,47 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block title %}
+Register 
+{% endblock %}
+    
+    {% block header2 %}
+    <div class="left">Enter the specified details below</div>
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    <div class="row">
+    <form class="row" method="POST" action="{% url 'register' %} " enctype="multipart/form-data">
+        
+        <div class="row">
+            <div class="container">      
+                <div class="row">
+                <br>
+                    <div class="card-panel col l12 offset-l9 m12 offset-m0 s8 z-depth z-depth-3" id="add-posts"> 
+                        <div class="container">
+                        {{registration_form}}
+                        {{profile_form}}
+                       <!--  <label for="age">Age:</label>
+
+                        <br> {{profile_form.age}}
+                        <label for="bio">Bio:</label>
+                        <br> {{profile_form.bio}}
+                        <label for="picture">Picture:</label>
+                        <br> {{profile_form.picture}} -->
+                        <br>
+                        <br>
+                        <button class="btn waves-effect waves-light red lighten-2" type="submit" name="action">REGISTER
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </div>   
+            </div> 
+        </div>
+ 
+
+            <br>
+    {% csrf_token %}
+    </form>  
+</div>
+{% endblock %}
+

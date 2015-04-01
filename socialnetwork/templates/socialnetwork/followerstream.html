@@ -1,0 +1,44 @@
+{% extends "socialnetwork/base.html" %}
+
+	{% block header1 %}
+    <div class="right">
+        <a href="{% url 'logout' %}" class="btn waves-effect waves-teal lighten-3">LOGOUT
+        </a>
+    </div> 
+    {% endblock %}
+    {% block header2 %}
+     <div class="right">
+        <a href="{% url 'home' %}" class="btn waves-effect waves-light red lighten-2">GLOBAL STREAM
+        </a>
+    </div> 
+    {% endblock %}
+
+   {% block content %}
+    <form>
+    <br><br>
+    <p class="center-align"> This is your follower stream: </p>
+    <div class="container">
+    <div class="row ">
+
+    {% for post in posts %}
+        <div class="container ">
+            <div class="card-panel col l12 offset-l9 m12 offset-m0 s8 z-depth-1" id="global-stream">
+                <div style="color:black">
+                    <!--<div class="left"> <a class="link" href="/socialnetwork/profile/{{post.user.id}}">{{post.user}}</a>-->
+                    <div class="left"> <a class="link" href="{% url 'profile' post.user.id %}">{{post.user}}</a>
+                    </div>
+                    <label class="right">{{post.date_time}}</label>
+                    <br>
+                    <div class="left">{{post.post_content}}
+                    </div>
+                </div> 
+            </div>
+        </div>
+        
+    {% endfor %} 
+    {% csrf_token %}
+    </div>
+    </div>
+    
+    </form>
+    {% endblock %}
